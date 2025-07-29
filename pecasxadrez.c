@@ -22,7 +22,7 @@ void moverRainha(int casas) {
 }
 
 // Função para movimentar o Cavalo (1x em L - Cima + Direita)
-void moverCavalo() {
+void moverCavaloCimaDireita() {
     // Loop aninhado com múltiplas variáveis e uso de break/continue
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
@@ -37,7 +37,29 @@ void moverCavalo() {
     }
 }
 
-// Versão para nível novato/aventureiro com diferentes tipos de loops
+// Função para movimentar o Cavalo (2 Baixo + 1 Esquerda)
+// Desafio do Nível Aventureiro
+void moverCavaloBaixoEsquerda() {
+    // Constantes para o número de casas a percorrer
+    const int casasBaixo = 2;
+    const int casasEsquerda = 1;
+
+    printf("\n--- Cavalo (Movimento em L - 2x Baixo + 1x Esquerda) ---\n");
+
+    // Loop externo com FOR para casas para baixo
+    for (int i = 0; i < casasBaixo; i++) {
+        printf("Baixo\n");
+    }
+
+    // Loop interno com WHILE para casa para esquerda
+    int j = 0;
+    while (j < casasEsquerda) {
+        printf("Esquerda\n");
+        j++;
+    }
+}
+
+// Versão inicial com diferentes tipos de loops
 void movimentosIniciais() {
     const int casasTorre = 5;
     const int casasBispo = 5;
@@ -76,8 +98,11 @@ void movimentosIniciais() {
 int main() {
     printf("=== DESAFIO DE XADREZ - MATECHECK ===\n");
 
-    // Nível Novato + Aventureiro
+    // Nível Novato + Aventureiro Inicial
     movimentosIniciais();
+
+    // Nível Aventureiro (Movimento do Cavalo com Loops Aninhados)
+    moverCavaloBaixoEsquerda();
 
     // Nível Mestre
     printf("\n=== NÍVEL MESTRE ===\n");
@@ -92,7 +117,8 @@ int main() {
     moverRainha(8);
 
     printf("\n--- Cavalo (1 movimento em L - Cima + Direita) ---\n");
-    moverCavalo();
+    moverCavaloCimaDireita();
 
     return 0;
 }
+
