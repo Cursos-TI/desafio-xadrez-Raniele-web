@@ -1,57 +1,74 @@
 #include <stdio.h>
 
-// Função recursiva para o movimento do Bispo (diagonal superior direita)
-void moverBispo(int casas) {
-    if (casas == 0) return;
-    printf("Cima Direita\n");
-    moverBispo(casas - 1);
-}
+// ======================= FUNÇÕES RECURSIVAS =========================
 
-// Função recursiva para o movimento da Torre (direita)
-void moverTorre(int casas) {
+// Função recursiva para mover a Torre para a Direita
+void moverTorreRecursivo(int casas) {
     if (casas == 0) return;
     printf("Direita\n");
-    moverTorre(casas - 1);
+    moverTorreRecursivo(casas - 1);
 }
 
-// Função recursiva para o movimento da Rainha (esquerda)
-void moverRainha(int casas) {
+// Função recursiva para mover a Rainha para a Esquerda
+void moverRainhaRecursivo(int casas) {
     if (casas == 0) return;
     printf("Esquerda\n");
-    moverRainha(casas - 1);
+    moverRainhaRecursivo(casas - 1);
 }
 
-// Função para movimentar o Cavalo (1x em L - Cima + Direita)
-void moverCavaloCimaDireita() {
-    // Loop aninhado com múltiplas variáveis e uso de break/continue
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 2; j++) {
-            if (i == 1 && j == 1) {
-                printf("Cima\n");
-                printf("Direita\n");
-                break;
-            } else {
+// Função recursiva para o Bispo (Diagonal Superior Direita)
+// Inclui loops aninhados para simular o avanço diagonal
+void moverBispoRecursivoComLoops(int casas) {
+    if (casas == 0) return;
+
+    // Loop aninhado: vertical e horizontal (movimento diagonal)
+    for (int linha = 0; linha < 1; linha++) {
+        for (int coluna = 0; coluna < 1; coluna++) {
+            printf("Cima Direita\n");
+        }
+    }
+
+    moverBispoRecursivoComLoops(casas - 1);
+}
+
+// ======================= MOVIMENTOS DO CAVALO =========================
+
+// Cavalo (Cima + Direita em L): 2 cima, 1 direita
+// Utiliza loops aninhados com múltiplas variáveis, break e continue
+void moverCavaloCimaDireita_L() {
+    printf("\n--- Cavalo (Movimento em L - 2x Cima + 1x Direita) ---\n");
+
+    const int casasCima = 2;
+    const int casasDireita = 1;
+
+    for (int i = 0; i <= casasCima; i++) {
+        if (i == casasCima) {
+            for (int j = 0; j < casasDireita + 1; j++) {
+                if (j == 1) {
+                    printf("Direita\n");
+                    break;
+                }
                 continue;
             }
+        } else {
+            printf("Cima\n");
         }
     }
 }
 
-// Função para movimentar o Cavalo (2 Baixo + 1 Esquerda)
-// Desafio do Nível Aventureiro
-void moverCavaloBaixoEsquerda() {
-    // Constantes para o número de casas a percorrer
+// Cavalo (Baixo + Esquerda em L) com loops simples
+void moverCavaloBaixoEsquerda_L() {
     const int casasBaixo = 2;
     const int casasEsquerda = 1;
 
     printf("\n--- Cavalo (Movimento em L - 2x Baixo + 1x Esquerda) ---\n");
 
-    // Loop externo com FOR para casas para baixo
+    // Loop externo com FOR para "Baixo"
     for (int i = 0; i < casasBaixo; i++) {
         printf("Baixo\n");
     }
 
-    // Loop interno com WHILE para casa para esquerda
+    // Loop interno com WHILE para "Esquerda"
     int j = 0;
     while (j < casasEsquerda) {
         printf("Esquerda\n");
@@ -59,32 +76,33 @@ void moverCavaloBaixoEsquerda() {
     }
 }
 
-// Versão inicial com diferentes tipos de loops
+// ======================= MOVIMENTOS INICIAIS (DESAFIOS ANTERIORES) =========================
+
 void movimentosIniciais() {
     const int casasTorre = 5;
     const int casasBispo = 5;
     const int casasRainha = 8;
 
-    printf("\n--- Torre (5 casas para a Direita) ---\n");
+    printf("\n--- Torre (5 casas para a Direita - loop for) ---\n");
     for (int i = 0; i < casasTorre; i++) {
         printf("Direita\n");
     }
 
-    printf("\n--- Bispo (5 casas na Diagonal Superior Direita) ---\n");
+    printf("\n--- Bispo (5 casas na Diagonal Superior Direita - loop while) ---\n");
     int i = 0;
     while (i < casasBispo) {
         printf("Cima Direita\n");
         i++;
     }
 
-    printf("\n--- Rainha (8 casas para a Esquerda) ---\n");
+    printf("\n--- Rainha (8 casas para a Esquerda - loop do-while) ---\n");
     int j = 0;
     do {
         printf("Esquerda\n");
         j++;
     } while (j < casasRainha);
 
-    printf("\n--- Cavalo (Movimento em L - Baixo + Esquerda) ---\n");
+    printf("\n--- Cavalo (Movimento em L - 1x Baixo + 1x Esquerda) ---\n");
     for (int i = 0; i < 1; i++) {
         int j = 0;
         while (j < 1) {
@@ -95,29 +113,35 @@ void movimentosIniciais() {
     }
 }
 
+// ======================= MAIN =========================
+
 int main() {
     printf("=== DESAFIO DE XADREZ - MATECHECK ===\n");
 
     // Nível Novato + Aventureiro Inicial
     movimentosIniciais();
 
-    // Nível Aventureiro (Movimento do Cavalo com Loops Aninhados)
-    moverCavaloBaixoEsquerda();
+    // Cavalo com loops aninhados (2 baixo + 1 esquerda)
+    moverCavaloBaixoEsquerda_L();
 
-    // Nível Mestre
+    // ================== NÍVEL MESTRE ==================
+
     printf("\n=== NÍVEL MESTRE ===\n");
 
-    printf("\n--- Bispo (5 casas na Diagonal Superior Direita - Recursão) ---\n");
-    moverBispo(5);
-
+    // Torre com recursão
     printf("\n--- Torre (5 casas para a Direita - Recursão) ---\n");
-    moverTorre(5);
+    moverTorreRecursivo(5);
 
+    // Rainha com recursão
     printf("\n--- Rainha (8 casas para a Esquerda - Recursão) ---\n");
-    moverRainha(8);
+    moverRainhaRecursivo(8);
 
-    printf("\n--- Cavalo (1 movimento em L - Cima + Direita) ---\n");
-    moverCavaloCimaDireita();
+    // Bispo com recursividade e loops aninhados
+    printf("\n--- Bispo (5 casas na Diagonal Superior Direita - Recursão + Loops) ---\n");
+    moverBispoRecursivoComLoops(5);
+
+    // Cavalo com movimento em L (Cima + Direita) com loops complexos
+    moverCavaloCimaDireita_L();
 
     return 0;
 }
